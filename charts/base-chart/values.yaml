@@ -1,0 +1,12 @@
+replicaCount: 2
+image:
+  repository: accounts-api
+  tag: "0.1"
+containerPort: 5000
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "250m"
+    memory: "256Mi"

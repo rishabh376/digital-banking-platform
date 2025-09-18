@@ -1,0 +1,17 @@
+groups:
+- name: dbank.rules
+  rules:
+  - alert: HighErrorRate
+    expr: rate(http_requests_total{job="accounts-api",status=~"5.."}[5m]) > 0.05
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High 5xx rate for accounts-api"
+  - alert: HighLatency
+    expr: histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{job="accounts-api"}[5m])) by (le)) > 1
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "95th percentile latency > 1s for accounts-api"
