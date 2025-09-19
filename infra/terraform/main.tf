@@ -2,7 +2,7 @@ resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
   location = var.location_primary
 }
-
+# Create Azure resources using modules
 module "acr" {
   source  = "./modules/acr"
   rg_name = azurerm_resource_group.rg.name
